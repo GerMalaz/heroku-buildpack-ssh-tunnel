@@ -15,7 +15,7 @@ chmod 0600 ${HOME}/.ssh/${keyfile}
 ssh-keyscan -H -p ${SSH_TUNNEL_PORT:-22} ${SSH_TUNNEL_SERVER} >> ${HOME}/.ssh/known_hosts
 
 # Start the SSH tunnel if not already running
-AUTOSSH_OPTIONS='-f -M 0 -o "ServerAliveInterval 10" -o "ServerAliveCountMax 3"' 
+AUTOSSH_OPTIONS="-f -M 0 -f -o ServerAliveInterval=10 -o ServerAliveCountMax=3"
 SSH_OPTIONS="-i ${HOME}/.ssh/${keyfile} -N -L ${LOCAL_TUNNEL_PORT}:${REMOTE_TUNNEL_SERVER:-localhost}:${REMOTE_TUNNEL_PORT} -p ${SSH_TUNNEL_PORT:-22} ${SSH_TUNNEL_USER}@${SSH_TUNNEL_SERVER}"
 
 echo $0: launching tunnel
